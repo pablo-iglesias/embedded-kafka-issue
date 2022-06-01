@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="TEST" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+    <timestamp key="bySecond" datePattern="ddMMyyyy'T'HHmmss"/>
+    <appender name="LOG" class="ch.qos.logback.core.FileAppender">
+        <file>src/test/resources/logs/tests_${bySecond}.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="LOG"/>
+    </root>
+
+    <logger name="DevelopmentTest" level="INFO">
+        <appender-ref ref="TEST"/>
+    </logger>
+    <logger name="org.apache.zookeeper" level="TRACE"/>
+    <logger name="kafka" level="TRACE"/>
+</configuration>
