@@ -14,6 +14,8 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
 import org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration;
 import org.springframework.kafka.config.KafkaStreamsConfiguration;
+import org.springframework.kafka.config.StreamsBuilderFactoryBeanConfigurer;
+import org.springframework.kafka.core.CleanupConfig;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -81,5 +83,12 @@ public class KafkaConfig {
     @Bean(name = "OUTPUT")
     public NewTopic outputTopic() {
         return new NewTopic("output-topic", 1, (short) 1);
+    }
+
+    @Bean
+    StreamsBuilderFactoryBeanConfigurer config() {
+        return fb -> {
+            fb.setCleanupConfig(new CleanupConfig(true, true));
+        };
     }
 }

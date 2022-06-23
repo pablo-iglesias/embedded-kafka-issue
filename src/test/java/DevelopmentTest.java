@@ -21,8 +21,8 @@ import java.util.List;
 @ExtendWith({ SpringExtension.class })
 @WebAppConfiguration
 @ContextConfiguration(classes = { MockMvcConfiguration.class })
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @EmbeddedKafka(partitions = 1, topics = {"input-topic", "output-topic"})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Import({KafkaConfig.class})
 public class DevelopmentTest {
 
